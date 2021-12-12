@@ -68,7 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# wizard-api
+# jester api
 API for wizard made with Express and Swagger. This will be merged with the wizard game when it is ready. 
 
 To start it, install Node and run:
