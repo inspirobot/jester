@@ -65,7 +65,7 @@ app.get('*', (req,res) =>{
   res.sendFile(`${__dirname}/build/index.html`);
 });
 
-const PORT = process.env.SERVER_PORT || 5000;
+const PORT = process.env.PORT || process.env.SERVER_PORT || 5000;
 app.listen(PORT);
 
 console.debug("Server listening on port: " + PORT);
