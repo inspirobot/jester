@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
+import { Container, Card, Button} from "react-bootstrap";
 
 export default function Home() {
     const { state, dispatch } = useContext(AuthContext);
@@ -20,77 +21,36 @@ export default function Home() {
   
     return (
       <Wrapper>
-        <div className="container">
-          <button onClick={()=> handleLogout()}>Logout</button>
-          <div>
-            <div className="content">
-              <img src={avatar_url} alt="Avatar"/>
-              <span>Welcome {name || login}</span>
-            </div>
-          </div>
-        </div>
+        <Container>
+          <Card className="text-center" >
+            <Card.Body>
+              <Card.Img class="rounded-circle" src={avatar_url} alt="Avatar" /> 
+              <Card.Text>Welcome {name || login}</Card.Text>
+              <Button variant="primary" onClick={()=> handleLogout()}>Logout</Button>
+            </Card.Body>
+          </Card>
+        </Container>
       </Wrapper>
     );
   }
   
   const Wrapper = Styled.section`
-.container{
+.container {
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
+  align-items: center;
+  justify-content: center;
   font-family: Arial;
 
-  button{
-    all: unset;
-    width: 100px;
-    height: 35px;
-    margin: 10px 10px 0 0;
-    align-self: flex-end;
-    background-color: #0041C2;
-    color: #fff;
-    text-align: center;
-    border-radius: 3px;
-    border: 1px solid #0041C2;
-
-    &:hover{
-      background-color: #fff;
-      color: #0041C2;
-    }
-  }
-
-  >div{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    font-size: 18px;
-    justify-content: center;
-    align-items: center;
-
-    .content{
-      display: flex;
-      flex-direction: column;
-      padding: 20px 100px;    
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
-      width: auto;
-  
-      img{
+  > .card {
+    max-width: 50%;
+    width: 18rem;  
+    > .card-body {
+      > img {
         height: 150px;
-        width: 150px;
-        border-radius: 50%;
+        width: '150px;
       }
-  
-      >span:nth-child(2){
-        margin-top: 20px;
-        font-weight: bold;
-      }
-  
-      >span:not(:nth-child(2)){
-        margin-top: 8px;
-        font-size: 14px;
-      }
-  
     }
-
-  }
+  } 
 }
 `;
