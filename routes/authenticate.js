@@ -86,7 +86,7 @@ router.post("/", async function (req, res) {
             return res.status(404);
         }
 
-        data.token = await auth.getToken({player}) 
+        data.token = await auth.getToken({data}) 
 
         return res.status(200).json(data);
     } catch(error)  {
