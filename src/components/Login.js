@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Styled from "styled-components";
-import { Container, Card, Button} from "react-bootstrap";
+import { Container, Card} from "react-bootstrap";
 import { DiscordLoginButton } from "react-social-login-buttons";
 import { GithubLoginButton } from "react-social-login-buttons";
 import { AuthContext } from "../App";

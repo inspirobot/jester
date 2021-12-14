@@ -28,6 +28,7 @@ const FormData = require("form-data");
 const axios = require('axios');
 
 const config = require("../config");
+const auth = require('../util/auth');
 
 async function GetDiscordTokenFromCode(code)
 {
@@ -84,6 +85,9 @@ router.post("/", async function (req, res) {
         } else {
             return res.status(404);
         }
+
+        data.token = await auth.getToken({player}) 
+
         return res.status(200).json(data);
     } catch(error)  {
         return res.status(400).json(error);

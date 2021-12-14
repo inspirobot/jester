@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Lobby from './components/Lobby'
 import Home from "./components/Home";
 import Login from "./components/Login";
+import NewGame from "./components/NewGame";
 import { initialState, reducer } from "./store/reducer";
 
 export const AuthContext = createContext();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login/:provider" element={<Login />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/lobby" element={<Lobby />}/>
+          <Route path="/newgame" element={<NewGame />}/>
         </Routes>
       </Router>
     </AuthContext.Provider>
