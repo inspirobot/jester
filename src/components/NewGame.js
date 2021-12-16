@@ -7,7 +7,7 @@ import { Suits, Ranks, Options, Scoring } from '../shared/constants';
 
 const lorem_ipsum = "Lorem ipsum|dolor sit|amet consectetur|adipiscing elit|sed do|eiusmod tempor|incididunt ut|labore et|dolore magna|aliqua Ut|enim ad|minim veniam|quis nostrud|exercitation ullamco|laboris nisi|ut aliquip ex|ea commodo|consequat Duis|aute irure dolor|in reprehenderit in|voluptate velit|esse cillum|dolore eu|fugiat nulla pariatur";
 
-export default function Home() {
+export default function NewGame() {
     const { state } = useContext(AuthContext);
   
     if (!state.isLoggedIn) {
@@ -21,16 +21,16 @@ export default function Home() {
     } 
 
     const children_ui_suits = Suits.map((suit, index) => {
-      return <Form.Check id={suit.name} label={suit.symbol} defaultChecked={suit.default}/> 
+      return <Form.Check key={suit.name} id={suit.name} label={suit.symbol} defaultChecked={suit.default}/> 
       });
     const children_ui_card_ranks = Ranks.map((rank, index) => {
-      return <Form.Check id={rank.name} label={rank.symbol} defaultChecked={true}/> 
+      return <Form.Check key={rank.name} id={rank.name} label={rank.symbol} defaultChecked={true}/> 
     });
     const children_ui_options = Options.map((option, index) => {
-      return <Form.Switch type="switch" id={option.name} label={option.label} defaultChecked={option.default}/>
+      return <Form.Switch key={option.name} type="switch" id={option.name} label={option.label} defaultChecked={option.default}/>
     });
     const children_ui_players = lorem_ipsum.split('|').map((player, index) => {
-      return <li><img class="rounded-circle" alt="" src={`http://placekitten.com/${50+index}`}/><span>{player}</span></li>
+      return <li key={index}><img className="rounded-circle" alt="" src={`http://placekitten.com/${50+index}`}/><span>{player}</span></li>
     });  
   
     const children_ui_score = Scoring.map((score, index) => {      
@@ -49,7 +49,7 @@ export default function Home() {
           <Container>
               <Form>
                 <Row>
-                  <FormGroup as={Col}>
+                  <FormGroup as={Col} className="formgroup">
                     <Form.Label as="legend" column sm={2}>
                       <h2>Options</h2>
                     </Form.Label>
@@ -79,13 +79,13 @@ export default function Home() {
                     <option value="10">Custom</option>
                     </Form.Select>
                   </FormGroup>
-                  <FormGroup as={Col}>
+                  <FormGroup as={Col} className="formgroup">
                     <Form.Label as="legend" column sm={2}>
                     <h2>Scoring</h2>
                     </Form.Label>
                     {children_ui_score}
                   </FormGroup>
-                  <FormGroup as={Col}>
+                  <FormGroup as={Col} className="formgroup">
                     <Form.Label as="legend" column sm={2}>
                     <h2>Variations</h2>
                     </Form.Label>
@@ -96,7 +96,7 @@ export default function Home() {
                     <h1>Deck Options</h1>
                 </Form.Label>
                 <Row>
-                    <FormGroup className="border" as={Col}>
+                    <FormGroup className="border formgroup" as={Col}>
                       <Form.Label as="legend" column sm={6}>
                         <h2>Power Cards</h2>
                       </Form.Label>
@@ -114,13 +114,13 @@ export default function Home() {
                         </Form.Group>
                         <Form.Switch type="switch" id="archwizard" label="ArchWizard" />
                       </FormGroup>
-                    <FormGroup className="border" as={Col}>
+                    <FormGroup className="border formgroup" as={Col}>
                       <Form.Label as="legend" column sm={2}>
                         <h2>Suits</h2>
                       </Form.Label>
                       {children_ui_suits}
                     </FormGroup>
-                    <FormGroup className="border" as={Col}>
+                    <FormGroup className="border formgroup" as={Col}>
                       <Form.Label as="legend" column sm={2}>
                         <h2>Ranks</h2>
                       </Form.Label>
@@ -134,7 +134,7 @@ export default function Home() {
                 <Button className="m-1" variant="success" onClick={()=> handleStartGame()}>Start</Button>
               </ButtonGroup>
           </Container>
-          <Container>
+          <Container className="formgroup">
             <h1>Players at this table</h1>
             <ul>
               {children_ui_players}
@@ -150,5 +150,8 @@ const Wrapper = Styled.section`
 img {
   height: 50px;
   width: 50px;
+}
+.formgroup {
+  background: white;
 }
 `;

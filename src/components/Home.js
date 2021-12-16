@@ -25,6 +25,7 @@ export default function Home() {
     } 
 
     const handleJoinGame = () => {
+      navigate("/game");
     } 
   
     return (
@@ -32,12 +33,12 @@ export default function Home() {
         <Container>
           <Card className="text-center" >
             <Card.Body>
-              <Card.Img class="rounded-circle" src={avatar_url} alt="Avatar" /> 
+              <Card.Img className="rounded-circle" src={avatar_url} alt="Avatar" /> 
               <Card.Text>Welcome {name || login}</Card.Text>
               <ButtonGroup vertical>
-                <Button className="m-1" variant="primary" onClick={()=> handleJoinGame()}>Join Game</Button>
-                <Button className="m-1" variant="primary" onClick={()=> handleNewGame()}>New Game</Button>
-                <Button className="m-1" variant="primary" onClick={()=> handleLogout()}>Logout</Button>
+                <Button key={"join"} className="m-1" variant="primary" onClick={()=> handleJoinGame()}>Join Game</Button>
+                <Button key={"new-game"} className="m-1" variant="primary" onClick={()=> handleNewGame()}>New Game</Button>
+                <Button key={"logout"} className="m-1" variant="primary" onClick={()=> handleLogout()}>Logout</Button>
               </ButtonGroup>
             </Card.Body>
           </Card>

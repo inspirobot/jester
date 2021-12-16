@@ -5,6 +5,7 @@ import Lobby from './components/Lobby'
 import Home from "./components/Home";
 import Login from "./components/Login";
 import NewGame from "./components/NewGame";
+import PlayerHand from "./components/Wizard/PlayerHand";
 import { initialState, reducer } from "./store/reducer";
 
 export const AuthContext = createContext();
@@ -23,8 +24,9 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/lobby" element={<Lobby />}/>
           <Route path="/newgame" element={<NewGame />}/>
+          <Route path="/game" element={<PlayerHand />}/>
         </Routes>
-      </Router>
+      </Router> 
     </AuthContext.Provider>
   );
 }
