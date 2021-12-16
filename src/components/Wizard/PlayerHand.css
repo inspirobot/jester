@@ -68,45 +68,6 @@ body {
   transition-delay: 0.1s;
   transition: top 0.5s ease 0.1s;
 }
-#spread > LI:nth-child(1) {
-  transform: translate(0em, 16px) rotate(-40deg);
-}
-#spread > LI:nth-child(2) {
-  transform: translate(1.6em, 11px) rotate(-34deg);
-}
-#spread > LI:nth-child(3) {
-  transform: translate(3.2em, 7px) rotate(-28deg);
-}
-#spread > LI:nth-child(4) {
-  transform: translate(4.8em, 4px) rotate(-22deg);
-}
-#spread > LI:nth-child(5) {
-  transform: translate(6.4em, 2px) rotate(-16deg);
-}
-#spread > LI:nth-child(6) {
-  transform: translate(8em, 1px) rotate(-10deg);
-}
-#spread > LI:nth-child(7) {
-  transform: translate(9.6em, 1px) rotate(-4deg);
-}
-#spread > LI:nth-child(8) {
-  transform: translate(11.2em, 2px) rotate(2deg);
-}
-#spread > LI:nth-child(9) {
-  transform: translate(12.8em, 4px) rotate(8deg);
-}
-#spread > LI:nth-child(10) {
-  transform: translate(14.4em, 7px) rotate(14deg);
-}
-#spread > LI:nth-child(11) {
-  transform: translate(16em, 11px) rotate(20deg);
-}
-#spread > LI:nth-child(12) {
-  transform: translate(17.6em, 16px) rotate(26deg);
-}
-#spread > LI:nth-child(13) {
-  transform: translate(19.2em, 22px) rotate(32deg);
-}
 #spread > LI:hover {
   left: 0;
   top: -40px;
@@ -131,22 +92,22 @@ body {
   box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.3), 0 0 30px rgba(255, 255, 200, 0.8);
 }
 
-#hand:before, #spread:before, #grid:before, #hand:after, #spread:after, #grid:after {
+.playing-hand:before, .playing-hand:after {
   content: "";
   display: table;
 }
-#hand:after, #spread:after, #grid:after {
+.playing-hand:after {
   clear: both;
 }
 
-#hand, #spread, #grid {
+.playing-hand {
   border: 7px solid #030;
   border-radius: 20px;
   position: relative;
   margin: 5% auto 10%;
 }
 
-#hand > LI, #spread > LI, #grid > LI {
+.playing-card {
   top: 0px;
   left: 0px;
   list-style: none;
@@ -160,18 +121,10 @@ body {
   backface-visibility: hidden;
   perspective: 1000;
   transform: translateZ(0deg);
-}
-
-#hand > LI[data-value], #spread > LI[data-value], #grid > LI[data-value] {
   overflow: hidden;
 }
-#hand > LI[data-value*='♣'][data-value], #spread > LI[data-value*='♣'][data-value], #grid > LI[data-value*='♣'][data-value], #hand > LI[data-value*='♠'][data-value], #spread > LI[data-value*='♠'][data-value], #grid > LI[data-value*='♠'][data-value] {
-  color: #222;
-}
-#hand > LI[data-value*='♦'][data-value], #spread > LI[data-value*='♦'][data-value], #grid > LI[data-value*='♦'][data-value], #hand > LI[data-value*='♥'][data-value], #spread > LI[data-value*='♥'][data-value], #grid > LI[data-value*='♥'][data-value] {
-  color: #a00;
-}
-#hand > LI[data-value]:before, #spread > LI[data-value]:before, #grid > LI[data-value]:before, #hand > LI[data-value]:after, #spread > LI[data-value]:after, #grid > LI[data-value]:after {
+
+.playing-hand > LI[data-value]:before, .playing-hand > LI[data-value]:after {
   content: attr(data-value);
   text-align: center;
   width: 1em;
@@ -181,12 +134,12 @@ body {
   margin-top: 4%;
   margin-left: 0%;
 }
-#hand > LI[data-value]:after, #spread > LI[data-value]:after, #grid > LI[data-value]:after {
+.playing-hand > LI:after {
   right: 0;
   bottom: 4%;
   transform: rotate(180deg);
 }
-#hand > LI[data-value] > P, #spread > LI[data-value] > P, #grid > LI[data-value] > P {
+.playing-hand > LI > P {
   display: block;
   width: 100%;
   height: 100%;
