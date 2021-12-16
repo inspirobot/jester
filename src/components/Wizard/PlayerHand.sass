@@ -57,7 +57,17 @@ body
         left: #{$position}
       $angle: $angle + 10deg
       $position: $position + 30px
-      
+
+@mixin spread-cards($angle, $positionX, $positionY, $numcards, $adjust)
+  @for $i from 1 through $numcards
+    &:nth-child(#{$i})
+      +transform(translate(#{$positionX},#{$positionY}) rotate(#{$angle}))
+    $angle: $angle + 6deg     
+    $positionX: $positionX + 1.6em
+    $positionY: $positionY - $adjust
+    $adjust: $adjust - 1px
+
+
 #spread
   @extend %cards
   $numcards: 13
@@ -69,14 +79,8 @@ body
     $positionX: 0em
     $positionY: 16px
     $adjust: 5px
+//    @include spread-cards($angle, $positionX, $positionY, $numcards, $adjust)
     +transition(top 0.5s ease 0.1s)
-    @for $i from 1 through $numcards
-      &:nth-child(#{$i})
-        +transform(translate(#{$positionX},#{$positionY}) rotate(#{$angle}))
-      $angle: $angle + 6deg     
-      $positionX: $positionX + 1.6em
-      $positionY: $positionY - $adjust
-      $adjust: $adjust - 1px
     &:hover
       +highlightcard(0,-40px)
       
