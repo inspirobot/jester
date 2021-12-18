@@ -1,5 +1,9 @@
 @import "node_modules/compass-sass-mixins/lib/compass"
 
+//                CSS Card Tricks -
+//                <a href="https://designshack.net/?p=38208">Click Here</a>
+//                to head to Design Shack article
+
 $cardwidth: 12rem
 $cardheight: ($cardwidth * 1.4) // poker card dimensions
 $cardtablesurface: '../../assets/green_felt.jpg'
@@ -79,7 +83,7 @@ body
     $positionX: 0em
     $positionY: 16px
     $adjust: 5px
-    @include spread-cards($angle, $positionX, $positionY, $numcards, $adjust)
+    //@include spread-cards($angle, $positionX, $positionY, $numcards, $adjust)
     +transition(top 0.5s ease 0.1s)
     &:hover
       +highlightcard(0,-40px)
