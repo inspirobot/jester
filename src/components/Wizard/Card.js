@@ -1,16 +1,18 @@
 import React from "react";
 import { Ranks, Suits } from "../../shared/constants";
+import Styled from "styled-components";
 
 export default function Card(props) {
     if (props.visible) {
-        return (                 
-            <li className="playing-card" 
+        return (        
+            <PlayingCard 
+                className="playing-card"
+                width={12}
                 style={{
                     color: `${Suits[props.suit].colour}`,
-                    transform: props.transform  
                 }} data-value={`${Ranks[props.rank].symbol} ${Suits[props.suit].symbol}`}>
                 <p data-suit={`${Suits[props.suit].symbol}`}><span>{Ranks[props.rank].symbol}</span><span>{Suits[props.suit].symbol}</span></p>
-            </li>
+            </PlayingCard>
         )
     } else {
         return (
@@ -21,3 +23,21 @@ export default function Card(props) {
     }
 }
 
+
+//width: ${props => props.width}rem;
+//height: ${props => props.width*1.4}rem;
+
+const PlayingCard = Styled.li`
+    top: 0px;
+    left: 0px;
+    list-style: none;
+    background-color: #fff;
+    background-image: url('../../assets/whitey.png');
+    border-radius: 15px;
+    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.5), 0 0 3px #966432;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translateZ(0deg);
+    overflow: hidden;
+`
