@@ -2,11 +2,11 @@ import React from "react";
 import { Ranks, Suits } from "../../shared/constants";
 import Styled from "styled-components";
 
+
 export default function Card(props) {
     if (props.visible) {
         return (        
             <PlayingCard 
-                className="playing-card"
                 width={12}
                 style={{
                     color: `${Suits[props.suit].colour}`,
@@ -16,7 +16,7 @@ export default function Card(props) {
         )
     } else {
         return (
-            <li className="playing-card">
+            <li>
                 <p data-suit=""><span></span><span></span></p>
             </li>
         )
@@ -26,8 +26,13 @@ export default function Card(props) {
 
 //width: ${props => props.width}rem;
 //height: ${props => props.width*1.4}rem;
+const cardwidth = 192;
+const cardheight = (cardwidth * 1.4); // poker card 
 
 const PlayingCard = Styled.li`
+    font: 100% 'Arial';
+    width: ${cardwidth}px;
+    height: ${cardheight}px;
     top: 0px;
     left: 0px;
     list-style: none;
