@@ -2,6 +2,8 @@ import React from "react";
 import { getCurvePoints } from "../../util/Curve";
 import Styled from "styled-components";
 
+
+
 function getCardTransform(count, type) {
     if (type === "spread") {
         let start_angle = -((count-1)*6/2);
@@ -12,14 +14,14 @@ function getCardTransform(count, type) {
         let start_angle = -count/2;
         return curve.map((point, index)=>{return {x: point.x, y:point.y, angle:start_angle + 3 * index}})
     } else {
-        let curve = getCurvePoints({x:0, y:0}, {x:count*1, y:0}, 11, count);
+        let curve = getCurvePoints({x:0, y:0}, {x:count*5, y:0}, 11, count);
         let start_angle = 0;
         return curve.map((point, index)=>{return {x: point.x, y:point.y, angle:start_angle}})
     }
 }
 
 function getCardHoverTransform(count, type) {
-        let curve = getCurvePoints({x:0, y:0}, {x:30*count, y:0}, 11, count);
+        let curve = getCurvePoints({x:0, y:0}, {x:count*5, y:50}, 11, count);
         let start_angle = 0;
         return curve.map((point, index)=>{return {x: point.x, y:point.y, angle:start_angle}})
 }
@@ -44,7 +46,7 @@ export default function Hand(props) {
             return (
                 <CardWrapper 
                     transform={`translate(${transform[index].x}em, ${transform[index].y}px) rotate(${transform[index].angle}deg)`}
-                    hovertransform={`translate(${hover_transform[index].x}px, ${transform[index].y}px)`}>
+                    hovertransform={`translate(${transform[index].x}em, ${transform[index].y-30}px)`}>
                 { child }                
                 </CardWrapper>
             )            
@@ -61,9 +63,6 @@ export default function Hand(props) {
 const HandWrapper=Styled.ul`
     width: 450px;
     height: 250px;
-  LI { 
-        position: absolute;
-    }
 `
 
 const CardWrapper=Styled.div`
@@ -75,11 +74,10 @@ display: inline-block;
 }
 &:hover {
     > LI {
-        left: 0;
-        top: -40px;
         cursor: pointer;
         box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.3), 0 0 30px rgba(255, 255, 200, 0.8);
         transform: ${props => props.hovertransform};
+        z-index:1;
     }
 }
 `

@@ -1,6 +1,6 @@
 import React from "react";
 import Styled from "styled-components";
-import cardbackground from '../assets/whitey.png'
+import wizard from '../assets/wizard5.png';
 
 export default function Test() {
     return (
@@ -70,12 +70,12 @@ export default function Test() {
                     <span>K</span><span>♥</span>
                 </p>
             </Card>
-            <Card data-value="W ♥">
+            <Card data-value="W">
                 <p data-suit="♥">
                     <span>W</span><span>♥</span>
                 </p>
             </Card>
-            <Card data-value="JE ♥">
+            <Card data-value="JE">
                 <p data-suit="♥">
                     <span>JE</span><span>♥</span>
                 </p>
@@ -85,7 +85,7 @@ export default function Test() {
 }
 
 const cardwidth = 256;
-const cardheight = cardwidth * 1.4;
+const cardheight = cardwidth * 1.56;
 const pip_right_xoff = 110/254 * cardwidth;
 const pip_bottom_yoff = cardheight/1.56;
 
@@ -103,7 +103,7 @@ const Card=Styled.li`
     width: ${cardwidth}px;
     height: ${cardheight}px;
     list-style: none;
-    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.5), 0 0 3px #966432;
+    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.25), 0 0 3px #966432;
     border-radius: ${.06*cardwidth}px;
     &:before, &:after {
         letter-spacing: ${-.03*cardwidth}px;
@@ -189,12 +189,13 @@ const Card=Styled.li`
             margin-left: ${.44*cardwidth}px;
             text-shadow: ${pip_right_xoff}px 0px;      
         }
-    }        
+    }
     &[data-value^='8'] > P {
         margin-left: ${.16*cardwidth}px;
-        text-shadow: ${pip_right_xoff}px 0px, 0px ${pip_bottom_yoff/3}px, ${pip_right_xoff}px ${pip_bottom_yoff/3}px;      
+        text-shadow: ${pip_right_xoff}px 0px, ${pip_right_xoff/2}px ${pip_bottom_yoff/4}px, 0px ${pip_bottom_yoff/2}px, ${pip_right_xoff}px ${pip_bottom_yoff/2}px ;      
         &:after {
             margin-left: ${.44*cardwidth}px;
+            text-shadow: ${pip_right_xoff}px 0px, ${pip_right_xoff/2}px ${pip_bottom_yoff/4}px;      
         }
     }        
     &[data-value^='9'] > P {
@@ -220,9 +221,19 @@ const Card=Styled.li`
         color: transparent;
         width: 65%;
         height: 80%;
-        margin-left: ${.18*cardwidth}px;
+        margin-left: ${.175*cardwidth}px;
         margin-top:  ${.14*cardwidth}px;
         border: 1px solid #000;        
+        background-position: center;
+        background-size: cover;
+        background-image: url(${wizard});
+    }        
+    &[data-value^='W'], &[data-value^='JE'] {
+        &:before, &:after {
+            font-family: 'Brush Script MT', cursive;
+            color: #0099FF;
+        }
+    }
 }  
 `
 
