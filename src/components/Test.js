@@ -1,47 +1,109 @@
 import React from "react";
-import { Ranks, Suits } from "../../shared/constants";
 import Styled from "styled-components";
+import wizard from '../assets/wizard5.png';
 
-import cardfinish from '../../assets/whitey.png';
-
-export default function Card(props) {
-    if (props.visible) {
-        return (        
-            <PlayingCard 
-                width={12}
-                background_image={props.rank === 0 ? Suits[props.suit].facecards[4] : Suits[props.suit].facecards[props.rank-11]}
-                style={{
-                    color: `${Suits[props.suit].colour}`,
-                }} data-value={`${Ranks[props.rank].symbol} ${Ranks[props.rank].symbol !== 'W' && Ranks[props.rank].symbol !== 'JE' ? Suits[props.suit].symbol : ''}`}>
-                <p data-suit={`${Suits[props.suit].symbol}`}><span>{Ranks[props.rank].symbol}</span><span>{Suits[props.suit].symbol}</span></p>
-            </PlayingCard>
-        )
-    } else {
-        return (
-            <li>
-                <p data-suit=""><span></span><span></span></p>
-            </li>
-        )
-    }
+export default function Test() {
+    return (
+        <Hand>
+            <Card data-value="A ♥">
+                <p data-suit="♥">
+                    <span>A</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="2 ♥">
+                <p data-suit="♥">
+                    <span>2</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="3 ♥">
+                <p data-suit="♥">
+                    <span>3</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="4 ♥">
+                <p data-suit="♥">
+                    <span>4</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="5 ♥">
+                <p data-suit="♥">
+                    <span>5</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="6 ♥">
+                <p data-suit="♥">
+                    <span>6</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="7 ♥">
+                <p data-suit="♥">
+                    <span>7</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="8 ♥">
+                <p data-suit="♥">
+                    <span>8</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="9 ♥">
+                <p data-suit="♥">
+                    <span>9</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="10 ♥">
+                <p data-suit="♥">
+                    <span>10</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="J ♥">
+                <p data-suit="♥">
+                    <span>J</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="Q ♥">
+                <p data-suit="♥">
+                    <span>Q</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="K ♥">
+                <p data-suit="♥">
+                    <span>K</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="W">
+                <p data-suit="♥">
+                    <span>W</span><span>♥</span>
+                </p>
+            </Card>
+            <Card data-value="JE">
+                <p data-suit="♥">
+                    <span>JE</span><span>♥</span>
+                </p>
+            </Card>
+        </Hand>
+    )
 }
 
-
-const cardwidth = 128;
-const cardheight = cardwidth * 1.4;
+const cardwidth = 256;
+const cardheight = cardwidth * 1.56;
 const pip_right_xoff = 110/254 * cardwidth;
 const pip_bottom_yoff = cardheight/1.56;
 
-const PlayingCard = Styled.li`
+const Hand=Styled.ul`
+display: flex;
+flex-wrap: wrap;
+`
+
+const Card=Styled.li`
 {
     font: 100% 'Arial';
     transform: scale(1,1);
-    background-image: url(${cardfinish});
     background-color: #fff;
-    position: absolute;
+    position: relative;
     width: ${cardwidth}px;
     height: ${cardheight}px;
     list-style: none;
-    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.5), 0 0 3px #966432;
+    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.25), 0 0 3px #966432;
     border-radius: ${.06*cardwidth}px;
     &:before, &:after {
         letter-spacing: ${-.03*cardwidth}px;
@@ -59,8 +121,8 @@ const PlayingCard = Styled.li`
         transform: rotate(180deg);
     }
     > P {
-        display: block;
         font-size: ${.375*cardwidth}px;
+        display: block;
         width: 100%;
         height: 100%;
         > SPAN:first-child {
@@ -79,17 +141,10 @@ const PlayingCard = Styled.li`
             padding-bottom: ${.65*cardheight            }px;
         }
     }
-
     &[data-value^='A'] > P {
         margin-left: ${.38*cardwidth}px;
         margin-top: ${.35*cardheight}px;
     }        
-    &[data-value='A ♠'] > P {
-        margin-left: ${.23*cardwidth}px;
-        margin-top: ${.05*cardheight}px;
-        font-size: ${cardwidth}px;
-        text-shadow: -1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 -3px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;
-    }
     &[data-value^='2'] > P {
         margin-left: ${.38*cardwidth}px;
         &:after {
@@ -134,7 +189,7 @@ const PlayingCard = Styled.li`
             margin-left: ${.44*cardwidth}px;
             text-shadow: ${pip_right_xoff}px 0px;      
         }
-    }        
+    }
     &[data-value^='8'] > P {
         margin-left: ${.16*cardwidth}px;
         text-shadow: ${pip_right_xoff}px 0px, ${pip_right_xoff/2}px ${pip_bottom_yoff/4}px, 0px ${pip_bottom_yoff/2}px, ${pip_right_xoff}px ${pip_bottom_yoff/2}px ;      
@@ -171,7 +226,7 @@ const PlayingCard = Styled.li`
         border: 1px solid #000;        
         background-position: center;
         background-size: cover;
-        background-image: url(${props => props.background_image});
+        background-image: url(${wizard});
     }        
     &[data-value^='W'], &[data-value^='JE'] {
         &:before, &:after {

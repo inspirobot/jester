@@ -1,63 +1,87 @@
+
+const images = require.context('../assets', false, /\.(png)$/);
+const FaceCards = ['Jack', 'Queen', 'King', 'Wizard', 'Jester' ];
+
 export const Suits = [
     { name: 'Spades',
       colour: '#222',
       symbol: '♠',
       default: true,
+      facecards: []
     }, 
     {
       name: 'Hearts',
       colour: '#a00',
       symbol: '♥',
       default: true,
+      facecards: []
     },    
     {
       name: 'Diamonds',
       colour: '#a00',
       symbol: '♦',
       default: true,
+      facecards: []
     },
     { name: 'Clubs',
       colour: '#222',
       symbol: '♣',
       default: true,
+      facecards: []
     },
     {
       name: 'Kings',
       colour: 'green',
       symbol: '♚',
       default: false,
+      facecards: []
     },  
     {
-      name: 'Clouds',
+      name: 'Queens',
       colour: 'blue',
       symbol: '♛',
       default: false,
+      facecards: []
     },
     {
       name: 'Rooks',
       colour: 'blue',
       symbol: '♜',
       default: false,
+      facecards: []
     },  
     {
       name: 'Bishops',
       colour: 'green',
       symbol: '♝',
       default: false,
+      facecards: []
     },
     {
       name: 'Knights',
-      colour: 'yellow',
+      colour: '#FEF23F',
       symbol: '♞',
       default: false,
+      facecards: []
     },
     {
       name: 'Pawns',
       colour: 'yellow',
       symbol: '♟',
       default: false,
+      facecards: []
     },
 ];
+
+for (const suit of Suits) {
+  for (const face of FaceCards) {
+    try {
+//      console.log(suit.name, face, images(`./${face}${suit.name}.png`).default);
+      suit.facecards.push(images(`./${face}${suit.name}.png`).default);
+    } catch(err) {
+    }
+  }
+};
 
   export const Scoring = [
     { 
