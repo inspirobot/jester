@@ -27,6 +27,10 @@ export default function Home() {
     const handleJoinGame = () => {
       navigate("/game");
     } 
+
+    const handleTest = () => {
+      navigate("/test");
+    } 
   
     return (
       <Wrapper>
@@ -39,6 +43,7 @@ export default function Home() {
                 <Button key={"join"} className="m-1" variant="primary" onClick={()=> handleJoinGame()}>Join Game</Button>
                 <Button key={"new-game"} className="m-1" variant="primary" onClick={()=> handleNewGame()}>New Game</Button>
                 <Button key={"logout"} className="m-1" variant="primary" onClick={()=> handleLogout()}>Logout</Button>
+                <Button key={"test"} className="m-1" variant="primary" onClick={()=> handleTest()}>Test</Button>
               </ButtonGroup>
             </Card.Body>
           </Card>
