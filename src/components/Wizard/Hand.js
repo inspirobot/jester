@@ -2,8 +2,6 @@ import React from "react";
 import { getCurvePoints } from "../../util/Curve";
 import Styled from "styled-components";
 
-
-
 function getCardTransform(count, type) {
     if (type === "spread") {
         let start_angle = -((count-1)*6/2);
@@ -67,6 +65,7 @@ const HandWrapper=Styled.ul`
 
 const CardWrapper=Styled.div`
 display: inline-block;
+position: absolute;
 
 > LI {
     transition: top 0.5s ease 0.1s, left 0.5s ease 0.2s, transform 0.5s ease 0.2s;

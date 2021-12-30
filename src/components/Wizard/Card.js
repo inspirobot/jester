@@ -8,7 +8,7 @@ export default function Card(props) {
     if (props.visible) {
         return (        
             <PlayingCard 
-                width={12}
+                cardwidth={props.width}
                 background_image={props.rank === 0 ? Suits[props.suit].facecards[4] : Suits[props.suit].facecards[props.rank-11]}
                 style={{
                     color: `${Suits[props.suit].colour}`,
@@ -26,22 +26,22 @@ export default function Card(props) {
 }
 
 
-const cardwidth = 128;
-const cardheight = cardwidth * 1.4;
-const pip_right_xoff = 110/254 * cardwidth;
-const pip_bottom_yoff = cardheight/1.56;
 
-const PlayingCard = Styled.li`
+const PlayingCard = Styled.li( props => {
+    const { cardwidth, background_image} = props;
+    const cardheight = cardwidth * 1.4;
+    const pip_right_xoff = 110/254 * cardwidth;
+    const pip_bottom_yoff = cardheight/1.56;
+    return `
 {
     font: 100% 'Arial';
     transform: scale(1,1);
     background-image: url(${cardfinish});
     background-color: #fff;
-    position: absolute;
     width: ${cardwidth}px;
     height: ${cardheight}px;
     list-style: none;
-    box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.5), 0 0 3px #966432;
+    box-shadow: inset 0 0 ${.25*cardwidth}px rgba(150, 100, 50, 0.25), 0 0 3px #966432;
     border-radius: ${.06*cardwidth}px;
     &:before, &:after {
         letter-spacing: ${-.03*cardwidth}px;
@@ -60,6 +60,7 @@ const PlayingCard = Styled.li`
     }
     > P {
         display: block;
+        position: absolute;
         font-size: ${.375*cardwidth}px;
         width: 100%;
         height: 100%;
@@ -171,7 +172,7 @@ const PlayingCard = Styled.li`
         border: 1px solid #000;        
         background-position: center;
         background-size: cover;
-        background-image: url(${props => props.background_image});
+        background-image: url(${background_image});
     }        
     &[data-value^='W'], &[data-value^='JE'] {
         &:before, &:after {
@@ -180,6 +181,6 @@ const PlayingCard = Styled.li`
         }
     }
 }  
-`
+`});
 
 

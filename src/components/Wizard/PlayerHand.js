@@ -11,7 +11,7 @@ const grid = [[1,SUIT.PAWNS],[1,SUIT.KINGS],[1,SUIT.QUEENS],[1,SUIT.ROOKS],[2,SU
 function hand_render(hand, type) {
     return hand.map((card, index) => {
         return (
-            <Card key={index} visible={!!card.length} suit={card[1]} rank={card[0]} />
+            <Card width={128} key={index} visible={!!card.length} suit={card[1]} rank={card[0]} />
         )
     })
 };
