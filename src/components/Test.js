@@ -3,7 +3,11 @@ import React, { useRef, useLayoutEffect, useState } from "react";
 import Styled from "styled-components";
 import { Card} from "react-bootstrap";
 import PlayingCard from "./Wizard/Card";
-import Hand from "./Wizard/Hand";
+import ScoreBoard from "./Wizard/ScoreBoard";
+import Trump from "./Wizard/Trump"
+import background_image from  '../assets/green_felt.jpg';
+import { PlayerColours } from "../shared/constants";
+import {backgroundtotextcolor} from "../util/color";
 
 const players=['Snuffles', 'Mittens', 'Kitty', 'Sam', 'Bootsie', 'Cosimo', 'Oscar', 'Flinty', 'Candy', 'Tiger', "Oberon", "Fluffy", "Mr T", "Squirrel", "Mordred"]
 
@@ -11,6 +15,8 @@ export default function Test() {
     return (
         <Game>
             <Table players={players}/>
+            <Trump card={{suit:0, rank:0}}/>
+            <ScoreBoard/>
         </Game>
     )
 }
@@ -64,10 +70,10 @@ function Table(props) {
                     return (
                         <>
                         <Card style={{width: "100px", top:`${y}px`, left:`${x}px`, position: "absolute"}} className="text-center field" >
-                            <Card.Img src={`https://placekitten.com/110/110?image=${index+4}`}/>
+                            <Card.Img src={`https://placekitten.com/110/110?image=${index}`}/>
                             {firstPlayer(index == 0)}
                             <Card.ImgOverlay className="text-white d-flex flex-column justify-content-end p-0"> 
-                            <Card.Text style={{background: 'rgba(0, 0, 0, 0.5)'}}>{name}</Card.Text>
+                            <Card.Text style={{background: `${PlayerColours[index]}`, opacity: '75%', color: `${backgroundtotextcolor(PlayerColours[index])}`}}>{name}</Card.Text>
                             </Card.ImgOverlay>
                         </Card>
                         <div style={{ position: 'absolute', 
@@ -96,6 +102,8 @@ height: 85%;
 aspect-ratio: 1 / 1;
 position: relative;
 border: 1px solid #000;
+background-image: url(${background_image});
+
 > #center { 
     width: 10px; 
     height: 10px; 

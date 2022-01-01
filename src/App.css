@@ -3,7 +3,6 @@ html, body, #root, #root>section {
 }
 
 body {
-  background-image: url('./assets/green_felt.jpg');
 }
 
 .App {
