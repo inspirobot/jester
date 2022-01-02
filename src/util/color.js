@@ -16,7 +16,6 @@ function hextoluminance(hex)
 
 export function backgroundtotextcolor(hex)
 {
-    console.log(hex, hextoluminance(hex));
     return hextoluminance(hex) > .5 ? '#000000' : '#ffffff';
 }
 

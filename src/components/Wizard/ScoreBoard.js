@@ -1,6 +1,6 @@
 import {Table} from "react-bootstrap";
-import React, { useState,  useEffect } from "react";
-import axios from "axios";
+import React /*, { useState,  useEffect }*/ from "react";
+//import axios from "axios";
 import { PlayerColours } from "../../shared/constants";
 import {backgroundtotextcolor} from "../../util/color";
 
@@ -50,10 +50,10 @@ const ScoreBoard = (props) => {
             <>
                 <th></th>
                 { scoretable.players.map((player, index) => {
-                return (
-                    <th colspan={2} style={{background: `${PlayerColours[index]}`, opacity: '75%', color: `${backgroundtotextcolor(PlayerColours[index])}`}}>{player}</th>
-                )
-                })}    
+                    return (
+                        <th key={"h"+index.toString()} colSpan={2} style={{background: `${PlayerColours[index]}`, opacity: '75%', color: `${backgroundtotextcolor(PlayerColours[index])}`}}>{player}</th>
+                    )
+                })}
             </>
         )
     }
@@ -61,30 +61,28 @@ const ScoreBoard = (props) => {
     function renderRows(scoretable) {
         return scoretable.rounds.map((round, index) => {
             return (
-                <tr>
-                    <td>{round.number}</td>
-                    { round.scores.map((score) => {
-                        return ( <><td>{score.bid}</td><td>{score.score}</td></>
+                <tr key={"r"+round.number.toString()}>                     
+                    <td key={0} style={{borderRight: '1px solid black'}}>{round.number}</td>
+                    { round.scores.map((score, index) => {
+                        return (<React.Fragment key={index+1}><td>{score.bid}</td><td style={{borderRight: '1px solid black'}}>{score.score}</td></React.Fragment>
                         );
-                    })};    
+                    })}   
                 </tr>
             )
         });
     }
 
     return (  
-        <>
-            <Table striped bordered size="sm">
-                <thead>
-                    <tr>
-                        {renderHeader(testData)}
-                    </tr>
-                </thead>
-                <tbody>    
-                        {renderRows(testData)}
-                </tbody>        
-            </Table>    
-        </>
+        <Table striped bordered size="sm">
+            <thead>
+                <tr>
+                    {renderHeader(testData)}
+                </tr>
+            </thead>
+            <tbody>    
+                    {renderRows(testData)}
+            </tbody>        
+        </Table>    
     )
 };
 

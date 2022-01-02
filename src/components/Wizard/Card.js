@@ -3,12 +3,15 @@ import { Ranks, Suits } from "../../shared/constants";
 import Styled from "styled-components";
 
 import cardfinish from '../../assets/whitey.png';
-
+import cardback from '../../assets/Violet-Classical-Pattern-Background.jpg'
 export default function Card(props) {
     if (props.visible) {
         return (        
             <PlayingCard 
                 cardwidth={props.width}
+                center={props.center}
+                top={props.y}
+                left={props.x}
                 background_image={props.rank === 0 ? Suits[props.suit].facecards[4] : Suits[props.suit].facecards[props.rank-11]}
                 style={{
                     color: `${Suits[props.suit].colour}`,
@@ -18,24 +21,29 @@ export default function Card(props) {
         )
     } else {
         return (
-            <li>
+            <PlayingCard                 
+                cardwidth={props.width}
+                top={props.y}
+                left={props.x}
+            > 
                 <p data-suit=""><span></span><span></span></p>
-            </li>
+            </PlayingCard>
         )
     }
 }
 
-
-
 const PlayingCard = Styled.li( props => {
-    const { cardwidth, background_image} = props;
+    const { cardwidth, background_image, top, left, center} = props;
     const cardheight = cardwidth * 1.4;
     const pip_right_xoff = 110/254 * cardwidth;
     const pip_bottom_yoff = cardheight/1.56;
     return `
 {
+    top: ${top}px;
+    left: ${left}px;
     font: 100% 'Arial';
-    transform: scale(1,1);
+    position: absolute;
+    ${ center && 'transform: translate(-50%, -50%);'}
     background-image: url(${cardfinish});
     background-color: #fff;
     width: ${cardwidth}px;
@@ -180,6 +188,14 @@ const PlayingCard = Styled.li( props => {
             color: #0099FF;
         }
     }
+    &:not([data-value]) > P {
+        width: 100%;
+        height: 100%;
+        margin: 0% auto 0;
+        background-image: url(${cardback});
+        background-position: center center;
+        border-radius: 7px;
+    }      
 }  
 `});
 

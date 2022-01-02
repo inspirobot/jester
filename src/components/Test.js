@@ -1,33 +1,26 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 
 import Styled from "styled-components";
-import { Card} from "react-bootstrap";
 import PlayingCard from "./Wizard/Card";
+import Player from "./Wizard/Player";
 import ScoreBoard from "./Wizard/ScoreBoard";
 import Trump from "./Wizard/Trump"
 import background_image from  '../assets/green_felt.jpg';
-import { PlayerColours } from "../shared/constants";
-import {backgroundtotextcolor} from "../util/color";
+import CircleLayout from "./CircleLayout";
 
 const players=['Snuffles', 'Mittens', 'Kitty', 'Sam', 'Bootsie', 'Cosimo', 'Oscar', 'Flinty', 'Candy', 'Tiger', "Oberon", "Fluffy", "Mr T", "Squirrel", "Mordred"]
 
 export default function Test() {
     return (
         <Game>
-            <Table players={players}/>
-            <Trump card={{suit:0, rank:0}}/>
+            {<GameTable players={players}/>}
+            {<Trump card={{suit:0, rank:0}}/>}
             <ScoreBoard/>
         </Game>
     )
 }
 
-function pt_on_circle(center, radius, angle) {
-    let x = Math.round(center.x + radius * Math.cos(angle));
-    let y = Math.round(center.y + radius * Math.sin(angle));
-    return {x, y}
-}
-
-function Table(props) {
+function GameTable(props) {
     const targetRef = useRef();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -45,56 +38,43 @@ function Table(props) {
         return () => window.removeEventListener("resize", updateSize);
     }, []);
 
-    const firstPlayer = (render) => {
-        if (render) {
-            return (
-                <Card.ImgOverlay className="text-black d-flex flex-column justify-content-start p-0"> 
-                    <Card.Text className="first-player">First Player</Card.Text>
-                </Card.ImgOverlay>
-            )
-        }
-    };
+    function renderPlayers(players) {
+        return props.players.map((name, index) => {
+            return <Player width={100} position={index} name={name} first={index===0} turn={index===4} image={`https://placekitten.com/110/110?image=${index}`}/>
+        })
+    }
 
-    const step = (2*Math.PI) / props.players.length;
+    function renderCards(players, dimensions, count, width, x, y, radius) {
+        let cards = [];
+        for (let index=0;index<count;++index) {
+            let rank=Math.floor(Math.random()*14)
+            let suit=Math.floor(Math.random()*4)
+            cards.push(
+                <PlayingCard width={dimensions.height/8} center='false' visible='true' suit={suit} rank={rank} />     
+            );   
+        }
+        return cards;
+    }
+
     return (
         <TableWrapper ref={ targetRef }>
             <div id="center"></div>
             <div id="crosshair-x"></div>
             <div id="crosshair-y"></div>
-            {   
-                props.players.map((name, index) => {
-                    const radius = dimensions.height/2;
-                    const card_radius = radius - 75;
-                    let {x, y} = pt_on_circle({x: dimensions.width/2, y: dimensions.width/2}, radius, index * step)
-                    let {x: card_x1, y: card_y1} = pt_on_circle({x: dimensions.width/2, y: dimensions.width/2}, card_radius, index * step)
-                    return (
-                        <>
-                        <Card style={{width: "100px", top:`${y}px`, left:`${x}px`, position: "absolute"}} className="text-center field" >
-                            <Card.Img src={`https://placekitten.com/110/110?image=${index}`}/>
-                            {firstPlayer(index == 0)}
-                            <Card.ImgOverlay className="text-white d-flex flex-column justify-content-end p-0"> 
-                            <Card.Text style={{background: `${PlayerColours[index]}`, opacity: '75%', color: `${backgroundtotextcolor(PlayerColours[index])}`}}>{name}</Card.Text>
-                            </Card.ImgOverlay>
-                        </Card>
-                        <div style={{ position: 'absolute', 
-                            transform: 'translate(-50%, -50%)', 
-                            top:`${card_y1}px`, left:`${card_x1}px`}} >
-                            <PlayingCard width={dimensions.height/8} visible='true' suit='0' rank={index} />     
-                        </div>
-                        </> 
-                    );   
-                })
-            };
+            <CircleLayout x={dimensions.width/2} y={dimensions.height/2} radius={dimensions.height/2}>
+                {renderPlayers(players)}
+            </CircleLayout>
+            <CircleLayout x={dimensions.width/2} y={dimensions.height/2} radius={dimensions.height/2 - 75} >
+                {renderCards(players, dimensions, players.length, dimensions.width/8, dimensions.width/2, dimensions.width/2, dimensions.width/2 - 75)}
+            </CircleLayout>
         </TableWrapper>
     )
 }
 
 const Game=Styled.div`
-height: 100%;
 width: 100%;
+height: 100%;
 display: flex;
-align-items: center;
-justify-content: center;
 `
 
 const TableWrapper=Styled.div`
@@ -111,13 +91,6 @@ background-image: url(${background_image});
     left: 50%; 
     top: 50%; 
     background: #000; 
-    transform: translate(-50%, -50%); 
-}
-.first-player {
-    background: rgba(192, 192, 0, 0.6);
-}
-.field { 
-    position: absolute; 
     transform: translate(-50%, -50%); 
 }
 > #crosshair-x { width: 100%; height: 1px; background: #000; position: absolute; left: 0; top: 50%; }

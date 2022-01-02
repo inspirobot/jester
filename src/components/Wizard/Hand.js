@@ -18,6 +18,7 @@ function getCardTransform(count, type) {
     }
 }
 
+/*
 function getCardHoverTransform(count, type) {
         let curve = getCurvePoints({x:0, y:0}, {x:count*5, y:50}, 11, count);
         let start_angle = 0;
@@ -33,12 +34,12 @@ function getCardTableMarking(type) {
 
     }   
 }
-
+*/
 
 export default function Hand(props) {
     function renderChildren(children) {
         let transform = getCardTransform(React.Children.count(children), props.type);
-        let hover_transform = getCardHoverTransform(React.Children.count(children), props.type);
+//        let hover_transform = getCardHoverTransform(React.Children.count(children), props.type);
 
         return React.Children.map(children, (child, index) => {
             return (

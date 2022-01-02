@@ -1,0 +1,6 @@
+Table -- winning card
+Player -- Bid/Tricks
+Player Hand (valid cards, sort hand)
+Game Stats Current Round, Bid, Tricks
+Score end of Round
+Card animation (card played, trick won)
